@@ -310,12 +310,14 @@ const dogs = [
   },
 ]
 
+// creiamo per ogni elemento una proprietà age:
+// CON UN FOR
 for (let i = 0; i < dogs.length; i++) {
   // la i varrà da 0 a 2
   dogs[i].age = 2 + i
 }
 
-// con un foreach
+// CON UN FOREACH
 dogs.forEach((cane, i) => {
   cane.age = 2 + i
   // i, se la esponete come secondo parametro della callback, si comporta
