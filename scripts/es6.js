@@ -325,5 +325,113 @@ dogs.forEach((cane, i) => {
 })
 
 // MAP
+// map TRASFORMA UN ARRAY IN UN ALTRO ARRAY DI PARI LUNGHEZZA
+
+// vogliamo creare un nuovo array con solamente i NOMI dei cani di dogs
+const dogsNames = dogs.map((cane) => {
+  // la differenza nel map è che dovrete RITORNARE un elemento ogni volta
+  // il valore che tornate rappresenterà la TRASFORMAZIONE che applicherete su
+  // ogni dog
+  return cane.name // da un oggetto ritorno una stringa, il suo nome
+})
+
+console.log(dogsNames) // è un array di STRINGHE
+
+// versione PRO, sfruttando il return "implicito" delle funzioni freccia
+const dogsNamesPro = dogs.map((cane) => cane.name) // ['Fufy', 'Gerry', 'Bruno']
+
+// metodo un po' underground per clonare un array :)
+const dogsCopy = dogs.map((dog) => {
+  return dog
+})
+
+// trasformiamo dogs in un altro array di oggetti: questa volta solo con il nome e l'età
+const simplerDogs = dogs.map((cane) => {
+  // cane è sempre un oggetto con 4 proprietà: name breed specialty age
+  return {
+    name: cane.name,
+    age: cane.age,
+  }
+})
+
+// x KEVIN, versione PRO
+const simplerDogsPro = dogs.map((cane) => ({
+  name: cane.name,
+  age: cane.age,
+}))
+
+// come si fa quando il valore di ritorno è un OGGETTO e volete ritornarlo
+// senza le graffe e senza il return? dovete circondare le graffe del vostro
+// oggetto che intendete ritornare con un paio di PARENTESI TONDE
+
+console.log('SIMPLERDOGS', simplerDogs)
+
+// trasformiamo dogs in un array di NUMERI. Ogni cane diventerà solo
+// un numero pari alla lunghezza del suo nome -> [4, 5, 5]
+
+const justNamesLength = dogs.map((cane) => {
+  return cane.name.length
+})
+
+console.log('lunghezze dei nomi', justNamesLength)
+
+// con MAP avete sempre la certezza di NON ROVINARE l'array originale, perchè
+// .map() ritorna SEMPRE un nuovo array (compreso di nuova allocazione in memoria)
+// con MAP otterrete SEMPRE un array di PARI LUNGHEZZA all'originale!
 
 // FILTER
+// il metodo FILTER serve per FILTRARE un array.
+// un array "filtrato" è un array in cui non è detto ci siano TUTTI gli elementi
+// dell'array di partenza: dato un array di partenza di 3 elementi, una versione
+// "filtrata" potrebbe avere 3 elementi, oppure 2, oppure 1, oppure 0.
+// gli elementi risultanti nell'array filtrato saranno identici a quelli originali.
+
+const gattini = [
+  {
+    name: 'Gino',
+    color: 'White',
+    age: 3,
+  },
+  {
+    name: 'Pino',
+    color: 'Black',
+    age: 4,
+  },
+  {
+    name: 'Rino',
+    color: 'White',
+    age: 2,
+  },
+  {
+    name: 'Mino',
+    color: 'Grey',
+    age: 7,
+  },
+]
+
+// voglio ottenere un array solamente di gatti bianchi.
+
+// FOR
+const whiteCats = []
+for (let i = 0; i < gattini.length; i++) {
+  if (gattini[i].color === 'White') {
+    whiteCats.push(gattini[i])
+  }
+}
+
+// FILTER
+const white = gattini.filter((gatto) => {
+  // dobbiamo tornare per ogni gatto true o false
+  // se per un certo gatto torniamo TRUE, il gatto PASSA IL FILTRO
+  // se per un certo gatto torniamo FALSE, il gatto NON PASSA IL FILTRO
+  if (gatto.color === 'White') {
+    return true // entra nell'array filtrato
+  } else {
+    return false // NON entra nell'array filtrato
+  }
+})
+
+const whitePro = gattini.filter((gatto) => gatto.color === 'White')
+console.log(whitePro)
+
+// REDUCE
