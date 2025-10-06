@@ -182,10 +182,146 @@ e insegno JS
 const myFirstName = 'Stefano'
 const myLastName = 'Morandi'
 const myAge = 60
+const returnCiao = () => 'Ciao!'
 
 const result1 =
   'Io mi chiamo ' + myFirstName + ' ' + myLastName + ' e ho ' + myAge + 'anni.'
 
-const result2 = `Io mi chiamo ${myFirstName} ${myLastName} e ho ${myAge} anni.`
+const result2 = `${returnCiao()} Io mi chiamo ${myFirstName} ${myLastName} e ho ${myAge} anni.`
 
 // result1 === result2
+console.log(result2)
+
+// METODI DELLE STRINGHE
+const str1 = 'Hello World!'
+str1.length // 12
+str1.slice(0, 5) // primi 5 caratteri, 'Hello'
+str1.includes('!') // true
+str1.includes('?') // false
+str1.charAt(11) // '!'
+str1.indexOf('!') // 11
+str1.trim() // 'HelloWorld!'
+
+const str2 = '          Stefano' // 'Stefano'
+
+// ARRAY
+// un array è una collezione (lista) di valori contenuti in un'unica allocazione
+// di memoria separati da virgola
+// gli array tipicamente sono "mono-tipo", ma questo non è un requisito
+const arr1 = [50, 1, 1500]
+const arr2 = [{ name: 'Stefano' }, { name: 'Piero' }, { name: 'Giovanni' }]
+const arr3 = [
+  [4, 5],
+  [true, false],
+  ['ciao', 'hello'],
+]
+
+// ogni array, come ogni stringa, è dotato di LUNGHEZZA (length) che è sempre
+// un numero pari alla quantità di elementi nell'array
+// gli array differenziano i loro elementi grazie alla loro POSIZIONE (non esiste
+// un nome, un'etichetta per ogni elemento come negli oggetti)
+// le POSIZIONI (o indici) negli array cominciano da 0 e terminano con length - 1
+// per recuperare un elemento da un array utilizziamo la formula
+// nomearray[indiceelemento]
+
+// per esplorare gli array tipicamente si utilizzano dei cicli, specialmente i for
+// per esplorare arr1:
+for (let i = 0; i < arr1.length; i++) {
+  // i diventa un numero da 0 fino a 2 (3-1)
+  // i cambia valore ad ogni iterazione
+  // utilizzando i come indice otteniamo ad ogni giro un elemento diverso dell'array
+  // arr1[0]
+  // arr1[1]
+  // arr1[2]
+  console.log(arr1[i])
+}
+
+// metodi degli array che conosciamo
+// .pop() <- fa saltare l'ultimo elemento di un array
+// .shift() <- fa saltare un elemento ad un array in posizione iniziale
+// .push() <- aggiunge un elemento ad un array in posizione finale
+// .unshift() <- aggiunge un elemento ad un array in posizione iniziale
+// .splice() <- aggiunge/rimuove elementi da un array in una determinata posizione
+// arr1.splice(1, 1) <-- rimuove il valore in seconda posizione, cioè 1
+
+// NOVITÀ DI ES6: nuovi METODI per gli array
+// questi nuovi metodi sono delle soluzione "integrate" per CICLARLO
+
+const numeri = [45, 60, 70, 95]
+// aggiungiamo 7 ad ogni valore
+for (let i = 0; i < numeri.length; i++) {
+  numeri[i] = numeri[i] + 7
+  // versione pro: numeri[i] += 7
+}
+// il risultato è che numeri ora risulta essere: [52, 67, 77, 102]
+
+// per accorciare/semplificare questa operazione, ES6 introduce il metodo
+// FOREACH
+const numeri2 = [45, 60, 70, 95]
+numeri2.forEach(function (element) {
+  // questo è un ciclo che scorre TUTTI gli elementi di numeri2
+  // qui dentro, come nel corpo del for, definite l'operazione da fare per ogni elementos
+  // element al primo giro è 45
+  // element al secondo giro è 60
+  // element al terzo giro è 70
+  // element al quarto giro è 95
+  element = element + 7
+  // PRO VERSION: element += 7
+})
+// una funzione passata come parametro ad un'altra funzione si def. "callback"
+// il risultato è che numeri ora risulta essere: [52, 67, 77, 102]
+
+// ES. X GIADA
+const stringhe = ['albero', 'orata', 'estonia', 'imola']
+
+const addG = function (str) {
+  console.log(`G${str}`)
+}
+stringhe.forEach(addG) // fornire un riferimento alla funzione precedente
+// console.log('STRINGHE DOPO GIADA', stringhe)
+// ES. X GIADA
+
+// altro esempio forEach
+const names = ['matteo', 'giorgio', 'alberto', 'silvia']
+names.forEach((name) => {
+  // questa funzione interna verrà eseguita 4 volte, una volta per ogni elemento
+  // dell'array
+  // l'elemento dell'array è utilizzabile grazie al nome del primo parametro
+  // della "callback"
+  name = name.charAt(0).toUpperCase() + name.slice(1)
+  console.log(name) // 'matteo', poi 'giorgio', poi 'alberto', infine 'silvia'
+})
+
+const dogs = [
+  {
+    name: 'Fufy',
+    breed: 'Pomeranian',
+    specialty: ['bark'],
+  },
+  {
+    name: 'Gerry',
+    breed: 'Labrador',
+    specialty: ['play'],
+  },
+  {
+    name: 'Bruno',
+    breed: 'Shepard',
+    specialty: ['Chase sheeps'],
+  },
+]
+
+for (let i = 0; i < dogs.length; i++) {
+  // la i varrà da 0 a 2
+  dogs[i].age = 2 + i
+}
+
+// con un foreach
+dogs.forEach((cane, i) => {
+  cane.age = 2 + i
+  // i, se la esponete come secondo parametro della callback, si comporta
+  // esattamente come la i che avreste nel for: è l'INDICE dell'elemento
+})
+
+// MAP
+
+// FILTER
